@@ -1,0 +1,64 @@
+---
+title: "Prueba3"
+author: "Víctor Ramos"
+date: '2022-07-22'
+output: html_document
+---
+
+# *GOOGLE FORMS Y RSTUDIO*
+
+El siguiente reporte pretende mostrar de forma básica y breve como es posible recolectar información mediante encuestas haciendo uso de Google y Rstudio, además, existe la posibilidad de realizar analítica descriptiva y presentación de resultados mediante archivos pdf o HTML.
+
+## Google Forms
+
+Formularios de Google (en inglés, Google Forms) es un software de administración de encuestas que se incluye como parte del conjunto gratuito Google Docs Editors basado en la web que ofrece Google. Formularios de Google solo está disponible como una aplicación web. La aplicación permite a los usuarios crear y editar encuestas en línea mientras colaboran con otros usuarios en tiempo real. La información recopilada se puede ingresar automáticamente en una hoja de cálculo.
+
+## RStudio
+
+RStudio es un entorno de desarrollo integrado (IDE) para el lenguaje de programación R, dedicado a la computación estadística y gráficos. Incluye una consola, editor de sintaxis que apoya la ejecución de código, así como herramientas para el trazado, la depuración y la gestión del espacio de trabajo.
+
+RStudio está disponible para Windows, Mac y Linux o para navegadores conectados a RStudio Server o RStudio Server Pro (Debian / Ubuntu, RedHat / CentOS, y SUSE Linux).3​ RStudio tiene la misión de proporcionar el entorno informático estadístico R. Permite un análisis y desarrollo para que cualquiera pueda analizar los datos con R.
+
+## Sobre la encuesta
+
+La encuesta fue realizada haciendo uso de Google Forms, se hicieron 4 preguntas básicas, y se distribuyó mediante WhatsApp. La encuesta fue respondida por 12 personas.
+
+### Preguntas
+
+-¿Cual es tu comida favorita? -Serie de TV favorita -¿Coca-Cola o Pepsi? -¿Tacos o torta?
+
+## Primer paso
+
+Para iniciar con el ejercicio fue necesario instalar y ejecutar la libreria "googlesheets4" para poder leer el formulario realizado en Google.
+
+```{r, warning=FALSE, message=FALSE}
+# Install.packages(googlesheets4)
+
+library(googlesheets4)
+gs4_deauth()
+Encuesta <- read_sheet("https://docs.google.com/spreadsheets/d/1zP61vcOCzNUuyBP0JkbhZCfZ9_XHx8aqBrnlk5_AUhc/edit?usp=sharing")
+```
+
+Haciendo uso de la libreria "kable" podemos insertar al documento la tabla que contiene los resultados de la muestra.
+
+```{r}
+library(kableExtra)
+knitr::kable(Encuesta,
+             align = "c",
+             caption = "Resultados de la encuesta")
+```
+
+```{r}
+library(ggplot2)
+```
+
+Fuentes:
+
+-https://googlesheets4.tidyverse.org/reference/gs4_deauth.html
+-https://googlesheets4.tidyverse.org/articles/auth.html
+-https://www.ic.fcen.uba.ar/materias/datos/material/rmarkdown-spanish.pdf 
+-https://googlesheets4.tidyverse.org/
+-https://www.rpubs.com/JohanMarin/Rmarkdown
+-https://bookdown.org/gboccardo/manual-ED-UCH/introduccion-al-uso-de-rmarkdown-para-la-compilacion-de-resultados-de-rstudio-en-diferentes-formatos.html 
+-https://es.r4ds.hadley.nz/r-markdown.html#solucionando-problemas
+
